@@ -1,0 +1,17 @@
+-- The following doesn't work.
+ALTER SESSION SET "_oracle_script"=true;
+
+CREATE USER hr IDENTIFIED BY "123" DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS;
+
+GRANT RESOURCE,CONNECT,CREATE TABLE,CREATE SESSION TO hr;
+
+-- This creates the table
+create table customers(
+    customer_id number(15) primary key,
+    first_name varchar2(30),
+    last_name varchar2(30),
+    gender varchar2(10)
+)
+
+-- This is just to show the correct way to format the name of a table
+select * from "BRIAN.HOBLIN"."CUSTOMERS";
