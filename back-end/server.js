@@ -1,5 +1,13 @@
 const express = require('express');
 const oracledb = require('oracledb');
+if (process.platform === 'darwin') {
+    try {
+      oracledb.initOracleClient({libDir: process.env.HOME + '/workspaces/instantclient_19_8'});
+    } catch (err) {
+      console.error(err);
+      process.exit(1);
+    }
+}
 const dotenv = require('dotenv');
 const app = express();
 const PORT = 5000;
@@ -8,7 +16,7 @@ var cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-app.listen(PORT, ()=>{console.log(`listen to port ${PORT}`);})
+app.listen(PORT, ()=>{console.log(`Listening to port ${PORT}`);})
 
 database_initialized = false
 
@@ -29,10 +37,7 @@ async function init_database() {
 	}
 }
 
-app.get('/', (req,res) => {
-    res.send('Hello world!');
-});
-
+// Basic GET request
 app.get('/get-customers', (req,res) => {
     async function fetchDataCustomers(){
         try {
@@ -40,7 +45,7 @@ app.get('/get-customers', (req,res) => {
 
             oracledb.outFormat = oracledb.OUT_FORMAT_ARRAY;
 
-            const query = process.env.QUERY_STR;
+            const query = `select * from "${process.env.USER_NAME.toUpperCase()}".CUSTOMERS`;
 
             const result = await connection.execute(query);
             console.log("Completed request");
