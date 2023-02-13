@@ -1,3 +1,5 @@
+// Something is off with the ES version and I cannot add "type": "module" to the package.json
+// without this breaking. This is why I'm using require instead of import.
 const express = require('express');
 const oracledb = require('oracledb');
 if (process.platform === 'darwin') {
