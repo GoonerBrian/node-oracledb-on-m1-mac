@@ -8,7 +8,7 @@ Pretty self-explanatory. Clone this repo to a directory of your choosing on your
 
 ## Install the x64 version Node.js/NVM using Rosetta
 
-Rosetta is a terminal that you can open on Apple Silicon machines that emulates the x64 architecture. The `node-oracledb` is needed if you want to create a Node.js backend but the package doesn't play nice on M1 Mac at this time. (I mean it's only been 2+ yrs. I'm sure they'll get around to it.)(That was sarcasm. Why does Oracle hate Apple Silicon? Beats me.) Rosetta is always spoken of vaguely and I haven't spent the time yet to find a simple way of switching between native and Rosetta terminals. I'll describe how I'm doing it because it will be referenced in a link I'm about to provide and their description will not be very helpful if this is your first time.
+Rosetta is a terminal that you can open on Apple Silicon machines that emulates the x64 architecture. The `node-oracledb` is needed if you want to create a Node.js backend but the package doesn't play nice on M1 Mac at this time. (I mean it's only been 2+ yrs. I'm sure they'll get around to it.)(That was sarcasm. Why does Oracle hate Apple Silicon? Beats me.) Rosetta is always spoken of vaguely and I haven't spent the time yet to find a simple way of switching between native and Rosetta terminals. I'll describe how I'm doing it because although it will be referenced in a link I'm about to provide, their description will not be very helpful if this is your first time.
 
 To open a Rosetta terminal:
 - Close any existing terminals
@@ -35,9 +35,9 @@ But it won't work yet.
 
 ## Install Oracle Instant Client
 
-If you were playing attention to the output of the last command, you should've seen something about `node-oracledb` needing to have access to Oracle Libraries and/or Instant Client. The offical documentation can be found [here](https://node-oracledb.readthedocs.io/en/latest/user_guide/installation.html#scripted-installation) but I preferred [this blog](https://blogs.oracle.com/opal/post/avoiding-the-dpi-1047-error-with-nodejs-node-oracledb-5-on-macos-and-windows). Same steps written by the same person, just worded a little different. (The author actually responded to my Stack Overflow posting and was very helpful. Apparently not all people on Stack Overflow are toxic trolls. Who would've guessed?)
+If you were paying attention to the output of the last command, you should've seen something about `node-oracledb` needing to have access to Oracle Libraries and/or Instant Client. The offical documentation can be found [here](https://node-oracledb.readthedocs.io/en/latest/user_guide/installation.html#scripted-installation) but I preferred [this blog](https://blogs.oracle.com/opal/post/avoiding-the-dpi-1047-error-with-nodejs-node-oracledb-5-on-macos-and-windows). Same steps written by the same person, just worded a little different. (The author actually responded to my Stack Overflow posting and was very helpful. Apparently not all people on Stack Overflow are toxic trolls. Who would've guessed?)
 
-You should take note that this approach stores the Instant Client package in your `Downloads` folder. I hate having things in my `Downloads` directory so I moved it to the parent of the `node-oracledb-on-m1-mac`, a directory where I keep all my projects called `workspaces`. Because of that, you will likely need to edit this line in the `server.js` file,
+You should take note that this approach stores the Instant Client package in your `Downloads` folder. I hate having things in my `Downloads` directory so I moved it to the parent of the `node-oracledb-on-m1-mac` directory, a directory where I keep all my projects called `workspaces`. Because of that, you will likely need to edit this line in the `server.js` file,
 ```
 oracledb.initOracleClient({libDir: process.env.HOME + '/workspaces/instantclient_19_8'});
 ```
@@ -57,7 +57,7 @@ Assuming you've already connected to your database using Oracle SQL Developer, y
 
 ## Connecting to the database and running the GET request
 
-I created a simple table called `customers` for testing this out. You can create one too, create a different, etc. but you'll need to update the query string if your table is named something different. 
+I created a simple table called `customers` for testing this out. You can create one too, create a different table, etc. but you'll need to update the query string if your table is named something different. 
 
 To start the server, do the following:
 - `cd back-end` (if not already there)
@@ -73,4 +73,4 @@ To run the GET request, open a browser and go to `localhost:5000/get-customers`.
 
 ## Closing
 
-This was done purely so that I could use my M1 Mac on a school project. I have a good Windows machine but after spending 40 hrs a week working on a Windows machine I prefer to spend my evenings doing my school work on my Mac. (The different keyboard, UI, etc. helps me ignore the fact I'm writing code, reading documentation, or in meetings 12-14 hrs a day between work and school.) Also, none of this is my original work. I was simply stubborn enough to keep looking for a solution to this issue and have aggragated my findings into this repo. Hopefully I didn't forget any steps! If something isn't working or you know of a between way, let me know! YouTube failed me and it took a while to piece things together. This might work but it can certainly be optimized.
+This was done purely so that I could use my M1 Mac on a school project. I have a good Windows machine but after spending 40 hrs a week working on a Windows machine I prefer to spend my evenings doing my school work on my Mac. (The different keyboard, UI, etc. helps me ignore the fact I'm writing code, reading documentation, or in meetings 12-14 hrs a day between work and school.) Also, none of this is my original work. I was simply stubborn enough to keep looking for a solution to this issue and have aggragated my findings into this repo. Hopefully I didn't forget any steps! If something isn't working or you know of a better way, let me know! YouTube failed me and it took a while to piece things together. This might work but it can certainly be optimized.
